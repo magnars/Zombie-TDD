@@ -1,6 +1,7 @@
 Zombier, mafia og testdrevet utvikling
 =======================================
-av Magnar
+av Magnar Sveen
+på http://zombietdd.com/
 
 Nettspill (testdrevet)
 -----------------------
