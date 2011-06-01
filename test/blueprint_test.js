@@ -1,6 +1,8 @@
+/*jslint indent: 2, onevar: false*/
+/*global ZOMBIE, assertObject, assertPrototype, assertEquals, assertException, sinon */
 (function (blueprint) {
 
-  TestCase('TestBlueprint', sinon.testCase({
+  testCase('TestBlueprint', sinon.testCase({
     "test should be an object": function () {
       assertObject(blueprint);
     },
