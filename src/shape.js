@@ -16,38 +16,44 @@ var ZOMBIE = this.ZOMBIE || {};
     }
   }
   
-  function create(shape) {
-    validateShape(shape);
+  function create(rows) {
+    validateShape(rows);
     var self = Object.create(this);
-    self.shape = shape;
+    self.rows = rows;
     return self;
   }
   
   function rotate() {
-    var shape = [], i, l;
+    var rows = [], i, l;
     for (i = 0, l = this.getWidth(); i < l; i += 1) {
-      shape.push(this.getColumn(i).join(""));
+      rows.push(this.getColumn(i).join(""));
     }
-    this.shape = shape;
+
+    return ZOMBIE.shape.create(rows);
   }
   
   function getColumn(index) {
     var column = [], i, l;
-    for (i = 0, l = this.shape.length; i < l; i += 1) {
-      column.push(this.shape[i].charAt(index));
+    for (i = 0, l = this.rows.length; i < l; i += 1) {
+      column.push(this.rows[i].charAt(index));
     }
     return column;
   }
   
   function getWidth() {
-    return this.shape[0].length;
+    return this.rows[0].length;
+  }
+  
+  function toArray() {
+    return this.rows;
   }
 
-  ZOMBIE.blueprint = {
+  ZOMBIE.shape = {
     create: create,
     rotate: rotate,
     getColumn: getColumn,
-    getWidth: getWidth
+    getWidth: getWidth,
+    toArray: toArray
   };
 
 }());

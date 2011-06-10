@@ -1,65 +1,64 @@
 /*jslint indent: 2, onevar: false*/
 /*global ZOMBIE, assertObject, assertPrototype, assertEquals, assertException, sinon */
-(function (blueprint) {
+(function (shape) {
 
-  testCase('TestBlueprint', sinon.testCase({
+  testCase('TestShape', sinon.testCase({
     "test should be an object": function () {
-      assertObject(blueprint);
+      assertObject(shape);
     },
 
-    "test should create blueprints": function () {
-      var bp = blueprint.create(["*"]);
-      assertPrototype(blueprint, bp);
+    "test should create shapes": function () {
+      var s = shape.create(["*"]);
+      assertPrototype(shape, s);
     },
     
     "test should have shape": function () {
-      var shape = ["***",
-                   "***"];
-      var bp = blueprint.create(shape);
-      assertEquals(shape, bp.shape);
+      var s = shape.create(["***",
+                            "***"]);
+      assertEquals(["***",      
+                    "***"], s.toArray());
     },
     
     "test should complain about missing shape": function () {
       assertException(function () {
-        blueprint.create();
+        shape.create();
       });
     },
     
     "test should complain about uneven shape": function () {
       assertException(function () {
-        blueprint.create(["***", "*"]);
+        shape.create(["***", "*"]);
       }, "TypeError");
     },
     
     "test should complain about empty shape": function () {
       assertException(function () {
-        blueprint.create([]);
+        shape.create([]);
       });
       
       assertException(function () {
-        blueprint.create([""]);
+        shape.create([""]);
       });
     },
     
     "test should extract columns": function () {
-      var shape = ["ab",
-                   "cd"];
-      var bp = blueprint.create(shape);
-      assertEquals(["a", "c"], bp.getColumn(0));
-      assertEquals(["b", "d"], bp.getColumn(1));
+      var s = shape.create(["ab",
+                            "cd"]);
+      assertEquals(["a", "c"], s.getColumn(0));
+      assertEquals(["b", "d"], s.getColumn(1));
     },
     
     "test should get width of shape": function () {
-      var shape = ["***",
-                   "***"];
-      assertEquals(3, blueprint.create(shape).getWidth());
+      var s = ["***",
+               "***"];
+      assertEquals(3, shape.create(s).getWidth());
     }
   }));
 
   function assertRotation(before, after) {
-    var bp = blueprint.create(before);
-    bp.rotate();
-    assertEquals(after, bp.shape);
+    var s = shape.create(before);
+    var newShape = s.rotate();
+    assertEquals(after, newShape.toArray());
   }
 
   testCase('BlueprintRotationTest', sinon.testCase({
@@ -73,9 +72,22 @@
     
     "test should rotate horizontal line": function () {
       assertRotation(["**"], ["*", "*"]);
+    },
+    
+    "test should rotate rectangles": function () {
+      assertRotation(["***", "***"], ["**", "**", "**"]);
+    },
+    
+    "test should rotate tetris like shapes": function () {
+      var before = ["***",
+                    "*  "];
+      var after = ["**",
+                   " *",
+                   " *"];
+      assertRotation(before, after);
     }
   }));
   
     
-}(ZOMBIE.blueprint));
+}(ZOMBIE.shape));
 
