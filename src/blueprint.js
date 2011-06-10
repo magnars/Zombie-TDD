@@ -4,10 +4,20 @@ var ZOMBIE = this.ZOMBIE || {};
 
 (function () {
   
-  function create(shape) {
-    if (!shape) {
-      throw new TypeError('shape must be array');
+  function validateShape(shape) {
+    var i, l;
+    if (!shape || !shape.length || !shape[0].length) {
+      throw new TypeError('shape must be array with at least one non-empty string');
     }
+    for (i = 1, l = shape.length; i < l; ++i) {
+      if (shape[i].length !== shape[i - 1].length) {
+        throw new TypeError("No uneven shapes");
+      }
+    }
+  }
+  
+  function create(shape) {
+    validateShape(shape);
     var self = Object.create(this);
     self.shape = shape;
     return self;

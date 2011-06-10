@@ -8,7 +8,7 @@
     },
 
     "test should create blueprints": function () {
-      var bp = blueprint.create([]);
+      var bp = blueprint.create(["*"]);
       assertPrototype(blueprint, bp);
     },
     
@@ -25,7 +25,23 @@
       });
     },
     
-    "test should have getColumn method": function () {
+    "test should complain about uneven shape": function () {
+      assertException(function () {
+        blueprint.create(["***", "*"]);
+      }, "TypeError");
+    },
+    
+    "test should complain about empty shape": function () {
+      assertException(function () {
+        blueprint.create([]);
+      });
+      
+      assertException(function () {
+        blueprint.create([""]);
+      });
+    },
+    
+    "test should extract columns": function () {
       var shape = ["ab",
                    "cd"];
       var bp = blueprint.create(shape);
@@ -33,7 +49,7 @@
       assertEquals(["b", "d"], bp.getColumn(1));
     },
     
-    "test should have getWidth method": function () {
+    "test should get width of shape": function () {
       var shape = ["***",
                    "***"];
       assertEquals(3, blueprint.create(shape).getWidth());
