@@ -1,4 +1,3 @@
-/*jslint indent: 2, onevar: false*/
 /*global TestCase, fail*/
 
 var testCase = TestCase;

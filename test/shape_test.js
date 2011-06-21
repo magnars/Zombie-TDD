@@ -1,5 +1,5 @@
-/*jslint indent: 2, onevar: false*/
-/*global ZOMBIE, assertObject, assertPrototype, assertEquals, assertException, sinon */
+/*global ZOMBIE, testCase, sinon,
+         assertObject, assertPrototype, assertEquals, assertException */
 (function (shape) {
 
   testCase('TestShape', sinon.testCase({
@@ -12,14 +12,14 @@
       assertPrototype(shape, s);
     },
     
-    "test should have shape": function () {
+    "test should return array representation": function () {
       var s = shape.create(["***",
                             "***"]);
       assertEquals(["***",      
                     "***"], s.toArray());
     },
     
-    "test should complain about missing shape": function () {
+    "test should complain about missing rows": function () {
       assertException(function () {
         shape.create();
       });
@@ -61,7 +61,7 @@
     assertEquals(after, newShape.toArray());
   }
 
-  testCase('BlueprintRotationTest', sinon.testCase({
+  testCase('ShapeRotationTest', sinon.testCase({
     "test should rotate exceedingly simple shape": function () {
       assertRotation(["*"], ["*"]);
     },
@@ -85,6 +85,23 @@
                    " *",
                    " *"];
       assertRotation(before, after);
+    },
+    
+    "test should rotate counter clockwise": function () {
+      var before = ["**",
+                    " *"];
+      var after = ["**",
+                   "* "];
+      var s = shape.create(before);
+      var newShape = s.rotateCCW();
+      assertEquals(after, newShape.toArray());
+    },
+    
+    "test should rotate door frames": function () {
+      assertRotation(["**<"], ["*", "*", "^"]);
+      assertRotation(["*", "*", "^"], [">**"]);
+      assertRotation([">**"], ["v", "*", "*"]);
+      assertRotation(["v", "*", "*"], ["**<"]);
     }
   }));
   
