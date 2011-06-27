@@ -6,6 +6,17 @@
   "linterOptions": {
     "indent": 2,
     "onevar": false,
-    "maxlen": 85
+    "maxlen": 85,
+    "predef": [
+      "ZOMBIE", 
+      "testCase", 
+      "sinon", 
+      "assertObject", 
+      "assertPrototype", 
+      "assertEquals", 
+      "assertException",
+      "assertTypeError",
+      "fail"
+    ]
   }
 }

@@ -1,42 +1,43 @@
-/*global ZOMBIE, testCase, sinon,
-         assertObject, assertPrototype, assertEquals, assertException */
 (function (shape) {
 
-  testCase('TestShape', sinon.testCase({
+  testCase('ShapeTest', sinon.testCase({
     "test should be an object": function () {
       assertObject(shape);
     },
 
     "test should create shapes": function () {
-      var s = shape.create(["*"]);
-      assertPrototype(shape, s);
+      assertPrototype(shape, shape.create(["*"]));
     },
     
     "test should return array representation": function () {
-      var s = shape.create(["***",
-                            "***"]);
-      assertEquals(["***",      
-                    "***"], s.toArray());
+      var s = shape.create(["***"]);
+      assertEquals(["***"], s.toArray());
+    },
+    
+    "test changing toArray-result should not affect shape": function () {
+      var s = shape.create(["***"]);
+      s.toArray()[0] = "* *";
+      assertEquals(["***"], s.toArray());
     },
     
     "test should complain about missing rows": function () {
-      assertException(function () {
+      assertTypeError(function () {
         shape.create();
       });
     },
     
     "test should complain about uneven shape": function () {
-      assertException(function () {
+      assertTypeError(function () {
         shape.create(["***", "*"]);
-      }, "TypeError");
+      });
     },
     
     "test should complain about empty shape": function () {
-      assertException(function () {
+      assertTypeError(function () {
         shape.create([]);
       });
       
-      assertException(function () {
+      assertTypeError(function () {
         shape.create([""]);
       });
     },
@@ -50,7 +51,7 @@
     
     "test should get width of shape": function () {
       var s = ["***",
-               "***"];
+               "*  "];
       assertEquals(3, shape.create(s).getWidth());
     }
   }));
@@ -104,7 +105,6 @@
       assertRotation(["v", "*", "*"], ["**<"]);
     }
   }));
-  
     
 }(ZOMBIE.shape));
 
