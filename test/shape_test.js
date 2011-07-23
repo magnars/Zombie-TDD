@@ -1,4 +1,5 @@
 (function (shape) {
+  "use strict";
 
   testCase('ShapeTest', sinon.testCase({
     "test should be an object": function () {

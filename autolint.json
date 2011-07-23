@@ -7,6 +7,7 @@
     "indent": 2,
     "onevar": false,
     "maxlen": 85,
+    "strict": true,
     "predef": [
       "ZOMBIE", 
       "testCase", 

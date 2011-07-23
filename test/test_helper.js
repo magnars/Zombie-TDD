@@ -1,3 +1,4 @@
+/*jslint strict:false*/
 /*global TestCase*/
 
 var testCase = TestCase;
