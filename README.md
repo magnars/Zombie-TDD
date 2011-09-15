@@ -7,3 +7,8 @@ Nettspill (testdrevet)
 -----------------------
  - frontend: javascript
  - backend: javascript (node.js)
+
+
+Utviklermiljø
+-------------
+Kjør `npm install` i root for å dra ned avhengigheter.

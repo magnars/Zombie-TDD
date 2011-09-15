@@ -1,0 +1,38 @@
+.sidebar
+  h1= title
+  p 100 resources left.
+  p Still alive: You and 4 guards.
+  .blueprints
+    h3 Your blueprints:
+    ul
+      li.blueprint
+        p.cost 5 resources
+        h4 Traphole
+        p A hole in the ground covered with some rotten planks.
+        .block
+          button Build Traphole
+      li.blueprint
+        p.cost 10 resources
+        h4 Hiding spot
+        p One hidden guard can make a surprise attack from here.
+        .block
+          button Build Hiding spot
+      li.blueprint
+        p.cost 20 resources
+        h4 Guardpost
+        p Two guards stationed here can fire a few round on intruders before falling back.
+        .block
+          button Build Guardpost
+  
+.game
+  ul.rooms
+    li.outside 
+      p Outside (30 zombies)
+    li.barricade 
+      p Barricade (43% integrity)
+    li.room 
+      p Trapdoor
+    li.room 
+      p Hiding spot (1 guard)
+    li.bed.room 
+      p Some beds (3 guards)
