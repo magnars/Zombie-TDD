@@ -48,6 +48,15 @@
       } ] });
       assertEquals("Hiding spot (1 guard)",
         findSingleElement(html, '.room:first').text());
+    },
+    
+    "test should render several rooms" : function() {
+      var html = Z.renderRooms({ rooms: [ 
+        { name: 'Trapdoor' },
+        { name: 'Hiding spot' }
+      ] });
+      // Two rooms + bedroom
+      assertEquals(2+1, $(html).find('.room').length);
     }
     
   }));
