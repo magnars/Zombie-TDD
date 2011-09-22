@@ -12,8 +12,8 @@
       var model = { rooms: [ { name: "Trapdoor" } ] };
       Z.addRoom("Hiding spot", model);
       assertEquals(model.rooms[1].name, "Hiding spot");
-    },
+    }
 
   }));
   
-})(ZOMBIE);
+}(ZOMBIE));

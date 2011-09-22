@@ -11,7 +11,8 @@
     "predef": [
       "ZOMBIE", 
       "testCase", 
-      "sinon", 
+      "sinon",
+      "jQuery",
       "assertObject", 
       "assertPrototype", 
       "assertEquals", 

@@ -1,4 +1,4 @@
-(function (Z) {
+(function (Z, $) {
   "use strict";
 
   function findSingleElement(html, selector) {
@@ -23,25 +23,25 @@
         findSingleElement(html, '.barricade').text());
     },
     
-    "test should render bedroom" : function() {
+    "test should render bedroom": function () {
       var html = Z.renderRooms({ sleepers: 3 });
       assertEquals("Some beds (3 guards)",
         findSingleElement(html, '.bed.room').text());
     },
 
-    "test should render outside" : function() {
+    "test should render outside": function () {
       var html = Z.renderRooms({ zombies: 30 });
       assertEquals("Outside (30 zombies)",
         findSingleElement(html, '.outside').text());
     },
     
-    "test should render room without guards" : function() {
+    "test should render room without guards": function () {
       var html = Z.renderRooms({ rooms: [ { name: 'Trapdoor' } ] });
       assertEquals("Trapdoor",
         findSingleElement(html, '.room:first').text());
     },
     
-    "test should render room with guards" : function() {
+    "test should render room with guards": function () {
       var html = Z.renderRooms({ rooms: [ { 
         name: 'Hiding spot',
         guards: 1
@@ -50,15 +50,15 @@
         findSingleElement(html, '.room:first').text());
     },
     
-    "test should render several rooms" : function() {
+    "test should render several rooms": function () {
       var html = Z.renderRooms({ rooms: [ 
         { name: 'Trapdoor' },
         { name: 'Hiding spot' }
       ] });
       // Two rooms + bedroom
-      assertEquals(2+1, $(html).find('.room').length);
+      assertEquals(2 + 1, $(html).find('.room').length);
     }
     
   }));
   
-}(ZOMBIE));
+}(ZOMBIE, jQuery));
