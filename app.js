@@ -16,6 +16,7 @@ app.configure(function(){
   app.use(express.methodOverride());
   app.use(app.router);
   app.use(express.static(__dirname + '/public'));
+  app.use(express.static(__dirname + '/lib'));
 });
 
 app.configure('development', function(){
@@ -28,9 +29,17 @@ app.configure('production', function(){
 
 // Routes
 
+var renderBuilding = require('lib/building_renderer');
+
 app.get('/', function(req, res){
   res.render('index', {
-    title: 'Zombie TDD'
+    title: 'Zombie TDD',
+    buildingHTML: renderBuilding({
+      zombies: 50,
+      barricade: 98,
+      rooms: [ { name: 'Trapdoor' } ],
+      sleepers: 4
+    })
   });
 });
 
