@@ -1,111 +1,120 @@
+if (typeof require === "function" && typeof module !== "undefined") {
+  buster = require("buster");
+  ZOMBIE = { shape: require("../lib/shape") };
+}
+
 (function (shape) {
   "use strict";
+  var assert = buster.assert;
 
-  testCase('ShapeTest', sinon.testCase({
-    "test should be an object": function () {
-      assertObject(shape);
+  buster.testCase('ShapeTest', {
+    "should be an object": function () {
+      assert.isObject(shape);
     },
 
-    "test should create shapes": function () {
-      assertPrototype(shape, shape.create(["*"]));
+    "should create shapes": function () {
+      assert.hasPrototype(shape.create(["*"]), shape);
     },
-    
-    "test should return array representation": function () {
+
+    "should return array representation": function () {
       var s = shape.create(["***"]);
-      assertEquals(["***"], s.toArray());
+      assert.equals(s.toArray(), ["***"]);
     },
-    
+
     "test changing toArray-result should not affect shape": function () {
       var s = shape.create(["***"]);
       s.toArray()[0] = "* *";
-      assertEquals(["***"], s.toArray());
+      assert.equals(s.toArray(), ["***"]);
     },
-    
-    "test should complain about missing rows": function () {
-      assertTypeError(function () {
+
+    "should complain about missing rows": function () {
+      assert.exception(function () {
         shape.create();
-      });
+      }, "TypeError");
     },
-    
-    "test should complain about uneven shape": function () {
-      assertTypeError(function () {
+
+    "should complain about uneven shape": function () {
+      assert.exception(function () {
         shape.create(["***", "*"]);
-      });
+      }, "TypeError");
     },
-    
-    "test should complain about empty shape": function () {
-      assertTypeError(function () {
+
+    "should complain about empty shape": function () {
+      assert.exception(function () {
         shape.create([]);
-      });
-      
-      assertTypeError(function () {
+      }, "TypeError");
+
+      assert.exception(function () {
         shape.create([""]);
-      });
+      }, "TypeError");
     },
-    
-    "test should extract columns": function () {
+
+    "should extract columns": function () {
       var s = shape.create(["ab",
                             "cd"]);
-      assertEquals(["a", "c"], s.getColumn(0));
-      assertEquals(["b", "d"], s.getColumn(1));
+      assert.equals(s.getColumn(0), ["a", "c"]);
+      assert.equals(s.getColumn(1), ["b", "d"]);
     },
-    
-    "test should get width of shape": function () {
+
+    "should get width of shape": function () {
       var s = ["***",
                "*  "];
-      assertEquals(3, shape.create(s).getWidth());
+      assert.equals(shape.create(s).getWidth(), 3);
     }
-  }));
+  });
 
-  function assertRotation(before, after) {
+  buster.assertions.add("rotation", function (before, after) {
     var s = shape.create(before);
     var newShape = s.rotate();
-    assertEquals(after, newShape.toArray());
-  }
+    this.actual = newShape.toArray();
+    return buster.assertions.deepEqual(this.actual, after);
+  }, {
+    assertFail: "Rotation failed: Expected ${1} to rotate to ${2}, but was ${actual}"
+  });
 
-  testCase('ShapeRotationTest', sinon.testCase({
-    "test should rotate exceedingly simple shape": function () {
-      assertRotation(["*"], ["*"]);
+  buster.testCase('ShapeRotationTest', {
+    "should rotate exceedingly simple shape": function () {
+      assert.rotation(["*"], ["*"]);
     },
-    
-    "test should rotate vertical line": function () {
-      assertRotation(["*", "*"], ["**"]);
+
+    "should rotate vertical line": function () {
+      assert.rotation(["*", "*"], ["**"]);
     },
-    
-    "test should rotate horizontal line": function () {
-      assertRotation(["**"], ["*", "*"]);
+
+    "should rotate horizontal line": function () {
+      assert.rotation(["**"], ["*", "*"]);
     },
-    
-    "test should rotate rectangles": function () {
-      assertRotation(["***", "***"], ["**", "**", "**"]);
+
+    "should rotate rectangles": function () {
+      assert.rotation(["***", "***"], ["**", "**", "**"]);
     },
-    
-    "test should rotate tetris like shapes": function () {
+
+    "should rotate tetris like shapes": function () {
       var before = ["***",
                     "*  "];
       var after = ["**",
                    " *",
                    " *"];
-      assertRotation(before, after);
+      assert.rotation(before, after);
     },
-    
-    "test should rotate counter clockwise": function () {
+
+    "should rotate counter clockwise": function () {
       var before = ["**",
                     " *"];
       var after = ["**",
                    "* "];
       var s = shape.create(before);
       var newShape = s.rotateCCW();
-      assertEquals(after, newShape.toArray());
+      assert.equals(newShape.toArray(), after);
     },
-    
-    "test should rotate door frames": function () {
-      assertRotation(["**<"], ["*", "*", "^"]);
-      assertRotation(["*", "*", "^"], [">**"]);
-      assertRotation([">**"], ["v", "*", "*"]);
-      assertRotation(["v", "*", "*"], ["**<"]);
+
+    "should rotate door frames": function () {
+      assert.rotation(["**<"], ["*", "*", "^"]);
+      assert.rotation(["*", "*", "^"], [">**"]);
+      assert.rotation([">**"], ["v", "*", "*"]);
+      assert.rotation(["v", "*", "*"], ["**<"]);
     }
-  }));
-    
+  });
+
 }(ZOMBIE.shape));
 
