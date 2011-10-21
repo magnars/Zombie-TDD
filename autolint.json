@@ -8,17 +8,10 @@
     "onevar": false,
     "maxlen": 85,
     "strict": true,
+    "node": true,
     "predef": [
-      "ZOMBIE", 
-      "testCase", 
-      "sinon",
-      "jQuery",
-      "assertObject", 
-      "assertPrototype", 
-      "assertEquals", 
-      "assertException",
-      "assertTypeError",
-      "fail"
+      "ZOMBIE",
+      "buster"
     ]
   }
 }

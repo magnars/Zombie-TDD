@@ -9,7 +9,8 @@ if (typeof require === "function" && typeof module !== "undefined") {
 
   function assertRoomText(cssClass, text, html) {
     var expected = "<li class='" + cssClass + "'><p>" + text + "</p></li>";
-    assert(html.indexOf(expected) >= 0, 'expected ' + html + ' to contain ' + expected);
+    assert(html.indexOf(expected) >= 0,
+           'expected ' + html + ' to contain ' + expected);
   }
 
   buster.testCase('Building renderer', {
