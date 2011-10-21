@@ -7,7 +7,7 @@ if (typeof require === "function" && typeof module !== "undefined") {
   "use strict";
   var assert = buster.assert;
 
-  buster.testCase('ShapeTest', {
+  buster.testCase('Shape', {
     "should be an object": function () {
       assert.isObject(shape);
     },
@@ -21,7 +21,7 @@ if (typeof require === "function" && typeof module !== "undefined") {
       assert.equals(s.toArray(), ["***"]);
     },
 
-    "test changing toArray-result should not affect shape": function () {
+    "changing toArray-result should not affect shape": function () {
       var s = shape.create(["***"]);
       s.toArray()[0] = "* *";
       assert.equals(s.toArray(), ["***"]);
@@ -72,7 +72,7 @@ if (typeof require === "function" && typeof module !== "undefined") {
     assertFail: "Rotation failed: Expected ${1} to rotate to ${2}, but was ${actual}"
   });
 
-  buster.testCase('ShapeRotationTest', {
+  buster.testCase('Shape rotation', {
     "should rotate exceedingly simple shape": function () {
       assert.rotation(["*"], ["*"]);
     },

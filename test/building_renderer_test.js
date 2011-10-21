@@ -12,7 +12,7 @@ if (typeof require === "function" && typeof module !== "undefined") {
     assert(html.indexOf(expected) >= 0, 'expected ' + html + ' to contain ' + expected);
   }
 
-  buster.testCase('BuildingRendererTest', {
+  buster.testCase('Building renderer', {
     "should render barricade": function () {
       var html = Z.renderBuilding({ barricade: 43 });
 

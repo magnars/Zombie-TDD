@@ -7,7 +7,7 @@ if (typeof require === "function" && typeof module !== "undefined") {
   "use strict";
   var assert = buster.assert;
 
-  buster.testCase('BuildingControllerTest', {
+  buster.testCase('Building controller', {
     "should add first room to model": function () {
       var model = {};
       Z.buildRoom("Trapdoor", model);
