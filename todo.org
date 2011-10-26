@@ -1,0 +1,7 @@
+* Todo [0/5]
+
+** TODO La byggeknappene pushe en buildRoom event - i første omgang til lokal eventhub
+** TODO La eventen oppdatere modellen
+** TODO Bruk den nye modellen til å rendre
+** TODO Push eventen til serveren istedet
+** TODO Oppdater modellen der også
