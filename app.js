@@ -29,7 +29,7 @@ app.configure('production', function(){
 
 // Routes
 
-var renderBuilding = require('lib/building_renderer');
+var renderBuilding = require('lib/shared/building_renderer');
 
 app.get('/', function(req, res){
   res.render('index', {

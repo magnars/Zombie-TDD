@@ -1,6 +1,6 @@
 if (typeof require === "function" && typeof module !== "undefined") {
   buster = require("buster");
-  ZOMBIE = { renderBuilding: require("../lib/building_renderer") };
+  ZOMBIE = { renderBuilding: require("../../lib/shared/building_renderer") };
 }
 
 (function (Z) {

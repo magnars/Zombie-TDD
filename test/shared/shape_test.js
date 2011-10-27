@@ -1,6 +1,6 @@
 if (typeof require === "function" && typeof module !== "undefined") {
   buster = require("buster");
-  ZOMBIE = { shape: require("../lib/shape") };
+  ZOMBIE = { shape: require("../../lib/shared/shape") };
 }
 
 (function (shape) {

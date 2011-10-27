@@ -1,8 +1,3 @@
-if (typeof require === "function" && typeof module !== "undefined") {
-  buster = require("buster");
-  ZOMBIE = { buildRoom: require("../lib/building_controller") };
-}
-
 (function (Z) {
   "use strict";
   var assert = buster.assert;
