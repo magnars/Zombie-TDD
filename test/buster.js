@@ -11,3 +11,9 @@ config["Browser tests"] = {
   tests: ["test/**/*_test.js"],
   environment: "browser"
 };
+
+
+// Clean up stack traces from browser tests
+var buster = require("buster");
+buster.stackFilter.filters.push("buster/bundle");
+buster.stackFilter.filters.push("buster/wiring");
