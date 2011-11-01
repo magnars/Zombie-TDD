@@ -6,7 +6,8 @@
     this.buildingRoot = document.createElement("div");
     this.blueprintRoot = document.createElement("div");
 
-    this.blueprintRoot.innerHTML = "<button class='buildRoom' data-type='Spiked mat'></button>";
+    this.blueprintRoot.innerHTML = "<button " +
+      "class='buildRoom' data-type='Spiked mat'></button>";
 
     this.controller = Z.buildingController.create({
       model: model,
