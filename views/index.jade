@@ -2,7 +2,7 @@
   h1= title
   p 100 resources left.
   p Still alive: You and 4 guards.
-  .blueprints
+  .blueprints#blueprints
     h3 Your blueprints:
     ul
       li.blueprint
@@ -10,19 +10,19 @@
         h4 Traphole
         p A hole in the ground covered with some rotten planks.
         .block
-          button Build Traphole
+          button.buildRoom(data-type="Traphole") Build Traphole
       li.blueprint
         p.cost 10 resources
         h4 Hiding spot
         p One hidden guard can make a surprise attack from here.
         .block
-          button Build Hiding spot
+          button.buildRoom(data-type="Hiding spot") Build Hiding spot
       li.blueprint
         p.cost 20 resources
         h4 Guardpost
         p Two guards stationed here can fire a few round on intruders before falling back.
         .block
-          button Build Guardpost
-  
-.game
+          button.buildRoom(data-type="Guardpost") Build Guardpost
+
+.game#building
   != buildingHTML
