@@ -4,6 +4,7 @@
  */
 
 var express = require('express');
+var faye = require("faye");
 
 var app = module.exports = express.createServer();
 
@@ -30,6 +31,7 @@ app.configure('production', function(){
 
 // Routes
 
+var bayeux = new faye.NodeAdapter({ mount: '/faye', timeout: 45 });
 var renderBuilding = require('lib/shared/building_renderer');
 
 app.get('/', function(req, res){
@@ -44,5 +46,6 @@ app.get('/', function(req, res){
   });
 });
 
+bayeux.attach(app);
 app.listen(3000);
 console.log("Express server listening on port %d in %s mode", app.address().port, app.settings.env);

@@ -1,3 +1,10 @@
+var hub = new Faye.Client("/faye");
+
+ZOMBIE.blueprintController.create({
+  blueprintRoot: document.getElementById("blueprints"),
+  hub: hub
+}).init();
+
 ZOMBIE.buildingController.create({
   model: {
     zombies: 50,
@@ -6,5 +13,6 @@ ZOMBIE.buildingController.create({
     sleepers: 4
   },
   buildingRoot: document.getElementById("building"),
-  blueprintRoot: document.getElementById("blueprints")
+  renderer: ZOMBIE.renderBuilding,
+  hub: hub
 }).init();

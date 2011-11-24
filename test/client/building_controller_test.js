@@ -4,15 +4,14 @@
 
   function setupController(model) {
     this.buildingRoot = document.createElement("div");
-    this.blueprintRoot = document.createElement("div");
-
-    this.blueprintRoot.innerHTML = "<button " +
-      "class='buildRoom' data-type='Spiked mat'></button>";
-
+    
+    this.hub = { subscribe: this.stub() };
+    
     this.controller = Z.buildingController.create({
       model: model,
       buildingRoot: this.buildingRoot,
-      blueprintRoot: this.blueprintRoot
+      renderer: ZOMBIE.renderBuilding,
+      hub: this.hub
     });
   }
 
@@ -40,14 +39,13 @@
       this.controller.buildRoom("Spiked mat");
       assert.match(this.buildingRoot.innerHTML, "Spiked mat");
     },
-
-    "should buildRoom when button is clicked": function () {
+    
+    "should render building on 'buildRoom' event": function () {
       this.setupController({});
+      this.hub.subscribe.yields({ name: "Flamethrower Surprise" });
       this.controller.init();
-      $(this.blueprintRoot).find("button").trigger("click");
-      assert.match(this.buildingRoot.innerHTML, "Spiked mat");
+      assert.match(this.buildingRoot.innerHTML, "Flamethrower Surprise");
     }
-
   });
 
 }(ZOMBIE));
