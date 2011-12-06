@@ -5,25 +5,18 @@ if (typeof require === "function" && typeof module !== "undefined") {
 
 (function (shape) {
   "use strict";
-  var assert = buster.assert;
 
   buster.testCase('Shape', {
-    "should be an object": function () {
-      assert.isObject(shape);
-    },
-
-    "should create shapes": function () {
-      assert.hasPrototype(shape.create(["*"]), shape);
-    },
-
     "should return array representation": function () {
       var s = shape.create(["***"]);
+
       assert.equals(s.toArray(), ["***"]);
     },
 
     "changing toArray-result should not affect shape": function () {
       var s = shape.create(["***"]);
       s.toArray()[0] = "* *";
+
       assert.equals(s.toArray(), ["***"]);
     },
 
@@ -52,6 +45,7 @@ if (typeof require === "function" && typeof module !== "undefined") {
     "should extract columns": function () {
       var s = shape.create(["ab",
                             "cd"]);
+
       assert.equals(s.getColumn(0), ["a", "c"]);
       assert.equals(s.getColumn(1), ["b", "d"]);
     },
@@ -59,17 +53,17 @@ if (typeof require === "function" && typeof module !== "undefined") {
     "should get width of shape": function () {
       var s = ["***",
                "*  "];
+
       assert.equals(shape.create(s).getWidth(), 3);
     }
   });
 
-  buster.assertions.add("rotation", function (before, after) {
-    var s = shape.create(before);
-    var newShape = s.rotate();
-    this.actual = newShape.toArray();
-    return buster.assertions.deepEqual(this.actual, after);
-  }, {
-    assertFail: "Rotation failed: Expected ${1} to rotate to ${2}, but was ${actual}"
+  buster.assertions.add("rotation", {
+    assert: function (before, after) {
+      this.actual = shape.create(before).rotate().toArray();
+      return buster.assertions.deepEqual(this.actual, after);
+    },
+    assertMessage: "Rotation failed: Expected ${0} to rotate to ${1}, but was ${actual}"
   });
 
   buster.testCase('Shape rotation', {
@@ -105,6 +99,7 @@ if (typeof require === "function" && typeof module !== "undefined") {
                    "* "];
       var s = shape.create(before);
       var newShape = s.rotateCCW();
+
       assert.equals(newShape.toArray(), after);
     },
 
@@ -115,6 +110,5 @@ if (typeof require === "function" && typeof module !== "undefined") {
       assert.rotation(["v", "*", "*"], ["**<"]);
     }
   });
-
 }(ZOMBIE.shape));
 
