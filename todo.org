@@ -1,7 +1,22 @@
-* Todo [0/5]
+Gjøremålsliste
 
-** TODO La byggeknappene pushe en buildRoom event - i første omgang til lokal eventhub
-** TODO La eventen oppdatere modellen
-** TODO Bruk den nye modellen til å rendre
-** TODO Push eventen til serveren istedet
-** TODO Oppdater modellen der også
+* TODO Serveren må også holde styr på modellen (duh)
+
+Det å lytte på eventer og holde modellen oppdatert er noe både klienten og
+serveren har lyst til å gjøre. En felles buildingKeeper kan være løsningen.
+
+* TODO Bli kvitt duplisering av building-rendering
+
+Nå eksisterer building-markupen i både Jade-templaten og i builderingRenderer.
+Fjern den fra Jade, og la klienten heller be om modellen fra serveren.
+
+* TODO Controller til View
+
+Når oppdatering av modell er dratt ut av controlleren, så kan den med trygghet
+kalles et View. Den sørger for å holde HTMLen oppdatert.
+
+* TODO Løsere knytning til Faye
+
+Legg et tynt wrapper-lag rundt Faye for mer kontroll over API og
+stubbing. Antagelig må client og server ha hver sin versjon?
+
