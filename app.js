@@ -32,7 +32,7 @@ app.configure('production', function(){
 // Routes
 
 var bayeux = new faye.NodeAdapter({ mount: '/faye', timeout: 45 });
-var renderBuilding = require('lib/shared/building_renderer');
+var renderBuilding = require('lib/shared/building-renderer');
 
 app.get('/', function(req, res){
   res.render('index', {
