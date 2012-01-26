@@ -63,7 +63,8 @@ if (typeof require === "function" && typeof module !== "undefined") {
       this.actual = shape.create(before).rotate().toArray();
       return buster.assertions.deepEqual(this.actual, after);
     },
-    assertMessage: "Rotation failed: Expected ${0} to rotate to ${1}, but was ${actual}"
+    assertMessage: "Rotation failed: Expected ${0} to rotate to ${1}, " +
+                   "but was ${actual}"
   });
 
   buster.testCase('Shape rotation', {
