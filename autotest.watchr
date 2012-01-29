@@ -7,7 +7,7 @@ end
 
 def run_all_tests
   system('clear')
-  result = run "buster test"
+  result = run "buster test -e browser"
   puts result
 end
 
