@@ -1,11 +1,13 @@
 if (typeof require === "function" && typeof module !== "undefined") {
   var buster = require("buster");
-  var ZOMBIE = { buildingController: require("../../lib/shared/building-controller") };
+  var ZOMBIE = {
+    buildingController: require("../../lib/shared/building-controller")
+  };
 }
 
 (function (Z) {
   "use strict";
-  
+
   buster.testCase('Building Controller', {
     setUp: function () {
       this.building = { buildRoom: this.stub() };
@@ -19,7 +21,7 @@ if (typeof require === "function" && typeof module !== "undefined") {
     "should notify listeners when building changes": function () {
       var listener = this.stub();
       this.controller.on("change", listener);
-      
+
       this.hub.subscribe.yields({ name: "Flamethrower Surprise" });
       this.controller.init();
 

@@ -5,7 +5,7 @@ if (typeof require === "function" && typeof module !== "undefined") {
 
 (function (Z) {
   "use strict";
-  
+
   buster.testCase('Building', {
     "should add first room to building": function () {
       var building = Z.building.create({});
