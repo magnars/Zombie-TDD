@@ -46,7 +46,9 @@ var testHelper = {};
   testHelper.loadPage = function (url, callback) {
     jQuery.get(pathPrefix + url, function (html) {
       document.body.innerHTML = html;
-      loadScriptsIn(html, callback);
+      loadScriptsIn(html, function () {
+        ZOMBIE.pageInitialized.then(callback);
+      });
     });
   };
 

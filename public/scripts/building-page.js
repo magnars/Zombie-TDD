@@ -1,18 +1,33 @@
-var hub = new Faye.Client("/faye");
+ZOMBIE.pageInitialized = (function (Z) {
+  "use strict";
 
-ZOMBIE.blueprintController.create({
-  blueprintRoot: document.getElementById("blueprints"),
-  hub: hub
-}).init();
+  var hub = new Faye.Client("http://localhost:3000/faye");
 
-ZOMBIE.buildingController.create({
-  model: {
+  Z.blueprintController.create({
+    blueprintRoot: document.getElementById("blueprints"),
+    hub: hub
+  }).init();
+
+  var building = Z.building.create({
     zombies: 50,
     barricade: 98,
     rooms: [{ name: "Trapdoor" }],
     sleepers: 4
-  },
-  buildingRoot: document.getElementById("building"),
-  renderer: ZOMBIE.renderBuilding,
-  hub: hub
-}).init();
+  });
+
+  var controller = Z.buildingController.create({
+    building: building,
+    hub: hub
+  });
+
+  controller.on("change", function (building) {
+    Z.updateBuildingView(
+      document.getElementById("building"),
+      Z.renderBuilding,
+      building
+    );
+  });
+
+  return controller.init();
+
+}(ZOMBIE));
