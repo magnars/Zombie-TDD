@@ -73,6 +73,39 @@ if (typeof require === "function" && typeof module !== "undefined") {
       assert.equals(lounge.zombies, 6);
       assert.equals(building.zombies, 4);
     },
+
+    "zombies crawl further into the building": function () {
+      var lounge = { name: "The Lounge", zombies: 3 };
+      var hallway = { name: "The Hallway", zombies: 1 };
+      var kitchen = { name: "The Kitchen" };
+      var building = Z.building.create({
+        zombies: 0,
+        barricade: 0,
+        rooms: [lounge, hallway, kitchen]
+      });
+
+      building.tick();
+
+      assert.equals(lounge.zombies, 1);
+      assert.equals(hallway.zombies, 2);
+      assert.equals(kitchen.zombies, 1);
+    },
+
+    "non-existant zombies don't crawl": function () {
+      var lounge = { name: "The Lounge", zombies: 0 };
+      var hallway = { name: "The Hallway", zombies: 1 };
+      var building = Z.building.create({
+        zombies: 0,
+        barricade: 0,
+        rooms: [lounge, hallway]
+      });
+
+      building.tick();
+
+      assert.equals(lounge.zombies, 0);
+      assert.equals(hallway.zombies, 1);
+    },
+
     "zombies are stopped by barricade": function () {
       var lounge = { name: "The Lounge", zombies: 0 };
       var building = Z.building.create({
