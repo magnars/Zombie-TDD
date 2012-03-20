@@ -10,7 +10,7 @@ ZOMBIE.pageInitialized = (function (Z) {
 
   var building = Z.building.create({
     zombies: 50,
-    barricade: 98,
+    barricade: 7,
     rooms: [{ name: "Trapdoor" }],
     sleepers: 4
   });

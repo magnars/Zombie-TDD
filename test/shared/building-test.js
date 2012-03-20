@@ -19,7 +19,7 @@ if (typeof require === "function" && typeof module !== "undefined") {
     },
 
     "has default value for barricade": function () {
-      assert.equals(Z.building.create({}).barricade, 100);
+      assert.equals(Z.building.create({}).barricade, 0);
     },
 
     "has default value for sleepers": function () {
@@ -27,13 +27,13 @@ if (typeof require === "function" && typeof module !== "undefined") {
     },
 
     "no zombies does not destroy barricade": function () {
-      var building = Z.building.create({});
+      var building = Z.building.create({barricade: 100});
       building.tick();
       assert.equals(building.barricade, 100);
     },
 
     "zombies destroy the barricade": function () {
-      var building = Z.building.create({zombies:100});
+      var building = Z.building.create({zombies:100, barricade: 100});
       building.tick();
       assert.equals(building.barricade, 100 - (100/100));
     },
@@ -43,6 +43,48 @@ if (typeof require === "function" && typeof module !== "undefined") {
       building.tick();
       building.tick();
       assert.equals(building.barricade, 0);
+    },
+
+    "zombies invade the lounge": function () {
+      var lounge = { name: "The Lounge" };
+      var building = Z.building.create({
+        zombies: 1,
+        barricade: 0,
+        rooms: [lounge]
+      });
+
+      building.tick();
+
+      assert.equals(lounge.zombies, 1);
+      assert.equals(building.zombies, 0);
+    },
+
+    "zombies invade the lounge in waves": function () {
+      var lounge = { name: "The Lounge" };
+      var building = Z.building.create({
+        zombies: 10,
+        barricade: 0,
+        rooms: [lounge]
+      });
+
+      building.tick();
+      building.tick();
+
+      assert.equals(lounge.zombies, 6);
+      assert.equals(building.zombies, 4);
+    },
+    "zombies are stopped by barricade": function () {
+      var lounge = { name: "The Lounge", zombies: 0 };
+      var building = Z.building.create({
+        zombies: 1,
+        barricade: 10,
+        rooms: [lounge]
+      });
+
+      building.tick();
+
+      assert.equals(lounge.zombies, 0);
+      assert.equals(building.zombies, 1);
     },
 
     "adds first room to building": function () {

@@ -39,7 +39,7 @@ app.get('/', function(req, res){
     title: 'Zombie TDD',
     buildingHTML: renderBuilding({
       zombies: 50,
-      barricade: 98,
+      barricade: 7,
       rooms: [ { name: 'Trapdoor' } ],
       sleepers: 4
     })
