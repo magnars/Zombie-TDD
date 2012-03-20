@@ -11,9 +11,12 @@ if (typeof require === "function" && typeof module !== "undefined") {
 
   buster.testCase('Building Controller', {
     setUp: function () {
-      this.building = { buildRoom: this.stub() };
-      this.subscription = { callback: this.stub() };
-      this.hub = { subscribe: this.stub().returns(this.subscription) };
+      this.building = { buildRoom: this.stub(), tick: this.stub() };
+      this.subBuildRoom = { callback: this.stub() };
+      this.subTick = { callback: this.stub() };
+      this.hub = { subscribe: this.stub() };
+      this.hub.subscribe.withArgs("/buildRoom").returns(this.subBuildRoom);
+      this.hub.subscribe.withArgs("/tick").returns(this.subTick);
       this.controller = Z.buildingController.create({
         building: this.building,
         hub: this.hub
@@ -41,7 +44,10 @@ if (typeof require === "function" && typeof module !== "undefined") {
       this.controller.init().then(spy);
 
       refute.called(spy);
-      this.subscription.callback.yield();
+      this.subBuildRoom.callback.yield();
+
+      refute.called(spy);
+      this.subTick.callback.yield();
 
       assert.calledOnce(spy);
     },
@@ -50,17 +56,24 @@ if (typeof require === "function" && typeof module !== "undefined") {
       var listener = this.stub();
       this.controller.on("change", listener);
 
-      this.hub.subscribe.yields({ name: "Flamethrower Surprise" });
+      this.hub.subscribe.withArgs("/buildRoom").yields({ name: "Flamethrower Surprise" });
       this.controller.init();
 
       assert.calledOnceWith(listener, this.building);
     },
 
     "should delegate events to building": function () {
-      this.hub.subscribe.yields({ name: "Flamethrower Surprise" });
+      this.hub.subscribe.withArgs("/buildRoom").yields({ name: "Flamethrower Surprise" });
       this.controller.init();
 
       assert.calledOnceWith(this.building.buildRoom, "Flamethrower Surprise");
+    },
+
+    "should delegate tick to building": function () {
+      this.hub.subscribe.withArgs("/tick").yields({});
+      this.controller.init();
+
+      assert.calledOnceWith(this.building.tick);
     }
   });
 }(ZOMBIE));
