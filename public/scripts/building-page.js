@@ -15,6 +15,8 @@ ZOMBIE.pageInitialized = (function (Z) {
     sleepers: 4
   });
 
+  Z.currentBuilding = building;
+
   var controller = Z.buildingController.create({
     building: building,
     hub: hub
