@@ -38,6 +38,13 @@ if (typeof require === "function" && typeof module !== "undefined") {
       assert.equals(building.barricade, 100 - (100/100));
     },
 
+    "zombies get through the barricade": function () {
+      var building = Z.building.create({zombies:100, barricade:1 });
+      building.tick();
+      building.tick();
+      assert.equals(building.barricade, 0);
+    },
+
     "adds first room to building": function () {
       var building = Z.building.create({});
 

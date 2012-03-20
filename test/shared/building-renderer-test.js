@@ -21,10 +21,16 @@ if (typeof require === "function" && typeof module !== "undefined") {
       assert.roomWithText(html, 'barricade', 'Barricade: 43% integrity');
     },
 
-    "should render barricade value for realz": function () {
-      var html = Z.renderBuilding({ barricade: 13 });
+    "should not render barricade when torn down": function () {
+      var html = Z.renderBuilding({ barricade: 0 });
 
-      assert.roomWithText(html, 'barricade', "Barricade: 13% integrity");
+      refute.roomWithText(html, 'barricade', "Barricade: 0% integrity");
+    },
+
+    "should only render integer barricade values": function () {
+      var html = Z.renderBuilding({ barricade: 4.7 });
+
+      assert.roomWithText(html, 'barricade', 'Barricade: 4% integrity');
     },
 
     "should render bedroom": function () {
