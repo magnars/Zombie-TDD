@@ -46,7 +46,7 @@ if (typeof require === "function" && typeof module !== "undefined") {
     },
 
     "zombies invade the lounge": function () {
-      var lounge = { name: "The Lounge" };
+      var lounge = Z.room.create({ name: "The Lounge" });
       var building = Z.building.create({
         zombies: 1,
         barricade: 0,
@@ -60,7 +60,7 @@ if (typeof require === "function" && typeof module !== "undefined") {
     },
 
     "zombies invade the lounge in waves": function () {
-      var lounge = { name: "The Lounge" };
+      var lounge = Z.room.create({ name: "The Lounge" });
       var building = Z.building.create({
         zombies: 10,
         barricade: 0,
@@ -75,9 +75,9 @@ if (typeof require === "function" && typeof module !== "undefined") {
     },
 
     "zombies crawl further into the building": function () {
-      var lounge = { name: "The Lounge", zombies: 3 };
-      var hallway = { name: "The Hallway", zombies: 1 };
-      var kitchen = { name: "The Kitchen" };
+      var lounge = Z.room.create({ name: "The Lounge", zombies: 3 });
+      var hallway = Z.room.create({ name: "The Hallway", zombies: 1 });
+      var kitchen = Z.room.create({ name: "The Kitchen" });
       var building = Z.building.create({
         zombies: 0,
         barricade: 0,
@@ -92,8 +92,8 @@ if (typeof require === "function" && typeof module !== "undefined") {
     },
 
     "non-existant zombies don't crawl": function () {
-      var lounge = { name: "The Lounge", zombies: 0 };
-      var hallway = { name: "The Hallway", zombies: 1 };
+      var lounge = Z.room.create({ name: "The Lounge", zombies: 0 });
+      var hallway = Z.room.create({ name: "The Hallway", zombies: 1 });
       var building = Z.building.create({
         zombies: 0,
         barricade: 0,
@@ -107,7 +107,7 @@ if (typeof require === "function" && typeof module !== "undefined") {
     },
 
     "zombies are stopped by barricade": function () {
-      var lounge = { name: "The Lounge", zombies: 0 };
+      var lounge = Z.room.create({ name: "The Lounge", zombies: 0 });
       var building = Z.building.create({
         zombies: 1,
         barricade: 10,
@@ -120,6 +120,29 @@ if (typeof require === "function" && typeof module !== "undefined") {
       assert.equals(building.zombies, 1);
     },
 
+    "let's kills some zombies": function () {
+      var trapdoor1 = Z.rooms.trapdoor.create({ zombies: 1 });
+      var trapdoor2 = Z.rooms.trapdoor.create();
+      var building = Z.building.create({
+        zombies: 10,
+        barricade: 0,
+        rooms: [trapdoor1, trapdoor2]
+      });
+
+      building.tick();
+
+      assert.equals(trapdoor1.zombies, 2);
+      assert.equals(trapdoor1.deadZombies, 1);
+
+      assert.equals(trapdoor2.zombies, 0);
+      assert.equals(trapdoor2.deadZombies, 1);
+    },
+
+    "trapdoors should not be anonymous": function () {
+      var trapdoor = Z.rooms.trapdoor.create();
+      assert.equals(trapdoor.name, "Trapdoor");
+    },
+
     "adds first room to building": function () {
       var building = Z.building.create({});
 
@@ -129,7 +152,7 @@ if (typeof require === "function" && typeof module !== "undefined") {
     },
 
     "adds more rooms to building": function () {
-      var building = Z.building.create({ rooms: [ { name: "Trapdoor" } ] });
+      var building = Z.building.create({ rooms: [ Z.room.create({ name: "Trapdoor" }) ] });
 
       building.buildRoom("Hiding spot");
 

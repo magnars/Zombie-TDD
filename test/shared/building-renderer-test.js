@@ -56,6 +56,11 @@ if (typeof require === "function" && typeof module !== "undefined") {
       assert.roomWithText(html, "room", "Lounge (3 zombies)");
     },
 
+    "should render room with dead zombies": function () {
+      var html = Z.renderBuilding({ rooms: [ { name: "Lounge", deadZombies: 3 } ]});
+      assert.roomWithText(html, "room", "Lounge (3 dead zombies)");
+    },
+
     "should render room with guards": function () {
       var html = Z.renderBuilding({ rooms: [ {
         name: 'Hiding spot',
