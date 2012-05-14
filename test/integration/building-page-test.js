@@ -1,3 +1,5 @@
+/*global testHelper*/
+
 (function () {
   "use strict";
 

@@ -11,10 +11,11 @@ var testHelper = {};
     var script = document.createElement("script");
 
     var done = false;
-    script.onload = script.onreadystatechange = function() {
+    script.onload = script.onreadystatechange = function () {
       script.loaded = true;
-      if ( !done && (!this.readyState ||
-                     this.readyState === "loaded" || this.readyState === "complete") ) {
+      if (!done && (!this.readyState ||
+                    this.readyState === "loaded" ||
+                    this.readyState === "complete")) {
         done = true;
         script.onload = script.onreadystatechange = null;
         callback();
@@ -24,9 +25,11 @@ var testHelper = {};
     script.loaded = false;
     script.src = src;
 
-    head.insertBefore( script, head.firstChild );
-    setTimeout(function() {
-      if(!script.loaded) throw new Error("SCRIPT NOT LOADED: " + script.src);
+    head.insertBefore(script, head.firstChild);
+    setTimeout(function () {
+      if (!script.loaded) {
+        throw new Error("SCRIPT NOT LOADED: " + script.src);
+      }
     }, 300);
   };
 

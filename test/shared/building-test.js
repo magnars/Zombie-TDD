@@ -33,13 +33,13 @@ if (typeof require === "function" && typeof module !== "undefined") {
     },
 
     "zombies destroy the barricade": function () {
-      var building = Z.building.create({zombies:100, barricade: 100});
+      var building = Z.building.create({ zombies: 100, barricade: 100 });
       building.tick();
-      assert.equals(building.barricade, 100 - (100/100));
+      assert.equals(building.barricade, 100 - (100 / 100));
     },
 
     "zombies get through the barricade": function () {
-      var building = Z.building.create({zombies:100, barricade:1 });
+      var building = Z.building.create({ zombies: 100, barricade: 1 });
       building.tick();
       building.tick();
       assert.equals(building.barricade, 0);
@@ -152,7 +152,9 @@ if (typeof require === "function" && typeof module !== "undefined") {
     },
 
     "adds more rooms to building": function () {
-      var building = Z.building.create({ rooms: [ Z.room.create({ name: "Trapdoor" }) ] });
+      var building = Z.building.create({
+        rooms: [ Z.room.create({ name: "Trapdoor" }) ]
+      });
 
       building.buildRoom("Hiding spot");
 

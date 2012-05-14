@@ -44,10 +44,10 @@ if (typeof require === "function" && typeof module !== "undefined") {
       this.controller.init().then(spy);
 
       refute.called(spy);
-      this.subBuildRoom.callback.yield();
+      this.subBuildRoom.callback.invokeCallback();
 
       refute.called(spy);
-      this.subTick.callback.yield();
+      this.subTick.callback.invokeCallback();
 
       assert.calledOnce(spy);
     },
@@ -56,14 +56,18 @@ if (typeof require === "function" && typeof module !== "undefined") {
       var listener = this.stub();
       this.controller.on("change", listener);
 
-      this.hub.subscribe.withArgs("/buildRoom").yields({ name: "Flamethrower Surprise" });
+      this.hub.subscribe.withArgs("/buildRoom").yields({
+        name: "Flamethrower Surprise"
+      });
       this.controller.init();
 
       assert.calledOnceWith(listener, this.building);
     },
 
     "should delegate events to building": function () {
-      this.hub.subscribe.withArgs("/buildRoom").yields({ name: "Flamethrower Surprise" });
+      this.hub.subscribe.withArgs("/buildRoom").yields({
+        name: "Flamethrower Surprise"
+      });
       this.controller.init();
 
       assert.calledOnceWith(this.building.buildRoom, "Flamethrower Surprise");
