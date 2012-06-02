@@ -1,6 +1,10 @@
 if (typeof require === "function" && typeof module !== "undefined") {
   var buster = require("buster");
-  var ZOMBIE = { building: require("../../lib/shared/building") };
+  var ZOMBIE = {
+    building: require("../../lib/shared/building"),
+    rooms: require("../../lib/shared/rooms"),
+    room: require("../../lib/shared/room")
+  };
 }
 
 (function (Z) {
