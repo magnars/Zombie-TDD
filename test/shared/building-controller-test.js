@@ -12,11 +12,7 @@ if (typeof require === "function" && typeof module !== "undefined") {
   buster.testCase('Building Controller', {
     setUp: function () {
       this.building = { buildRoom: this.stub(), tick: this.stub() };
-      this.subBuildRoom = { callback: this.stub() };
-      this.subTick = { callback: this.stub() };
-      this.hub = { subscribe: this.stub() };
-      this.hub.subscribe.withArgs("/buildRoom").returns(this.subBuildRoom);
-      this.hub.subscribe.withArgs("/tick").returns(this.subTick);
+      this.hub = { on: this.stub() };
       this.controller = Z.buildingController.create({
         building: this.building,
         hub: this.hub
@@ -35,47 +31,37 @@ if (typeof require === "function" && typeof module !== "undefined") {
       }, "TypeError");
     },
 
-    "init should return promise": function () {
-      assert(when.isPromise(this.controller.init()));
-    },
-
-    "init promise should resolve when hub is subscribed": function () {
-      var spy = this.spy();
-      this.controller.init().then(spy);
-
-      refute.called(spy);
-      this.subBuildRoom.callback.invokeCallback();
-
-      refute.called(spy);
-      this.subTick.callback.invokeCallback();
-
-      assert.calledOnce(spy);
+    "init should return promise from hub": function () {
+      this.hub.on.returns("my little promise");
+      assert.equals(this.controller.init(), "my little promise");
     },
 
     "should notify listeners when building changes": function () {
       var listener = this.stub();
       this.controller.on("change", listener);
+      this.controller.init();
 
-      this.hub.subscribe.withArgs("/buildRoom").yields({
+      this.hub.on.yieldTo("buildRoom", {
         name: "Flamethrower Surprise"
       });
-      this.controller.init();
 
       assert.calledOnceWith(listener, this.building);
     },
 
     "should delegate events to building": function () {
-      this.hub.subscribe.withArgs("/buildRoom").yields({
+      this.controller.init();
+
+      this.hub.on.yieldTo("buildRoom", {
         name: "Flamethrower Surprise"
       });
-      this.controller.init();
 
       assert.calledOnceWith(this.building.buildRoom, "Flamethrower Surprise");
     },
 
     "should delegate tick to building": function () {
-      this.hub.subscribe.withArgs("/tick").yields({});
       this.controller.init();
+
+      this.hub.on.yieldTo("tick", {});
 
       assert.calledOnceWith(this.building.tick);
     }
