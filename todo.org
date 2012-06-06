@@ -1,21 +1,24 @@
-* Gjøremålsliste
-
-** TODO Serveren må også holde styr på modellen (duh)
-
-Det å lytte på eventer og holde modellen oppdatert er noe både klienten og
-serveren har lyst til å gjøre. En felles buildingKeeper kan være løsningen.
-
-** TODO Bli kvitt duplisering av building-rendering
-
-Nå eksisterer building-markupen i både Jade-templaten og i builderingRenderer.
-Fjern den fra Jade, og la klienten heller be om modellen fra serveren.
-
-** TODO Controller til View
-
-Når oppdatering av modell er dratt ut av controlleren, så kan den med trygghet
-kalles et View. Den sørger for å holde HTMLen oppdatert.
-
-** TODO Løsere knytning til Faye
-
-Legg et tynt wrapper-lag rundt Faye for mer kontroll over API og
-stubbing. Antagelig må client og server ha hver sin versjon?
+* Gjøremålsliste [0/13]
+** TODO Dra i land eventHub
+*** blueprint-controller (emit)
+*** building-page
+*** integrasjonstest
+*** rydd ved å dra stuff inn i create-metoden
+*** delegate/resolve til delegates/resolves
+** TODO "should do" -> "does"
+** TODO Hører tester "zombier angriper gjennom rom i en building" i building-test.js?
+** TODO updateBuildingView -> dra inn renderer direkte
+** TODO rooms.js: Z.create -> _.extend(Object.create(), ...);
+** TODO Server må lytte på events også
+** TODO Fjern duplisering av building-json (nå i building-page.js og app.js)
+** TODO buildRoom event må gi et Z.room, ikke { name }
+** TODO rooms/trapdoor.js
+** TODO AMD
+** TODO Z.creator
+** TODO Ha oppsett express i egen fil
+** TODO bruke cull.dom.el for å bygge elementer
+*** inkludert jsdom for å servere ferdig tygget html fra server
+* Tankeliste
+** Jeg er usikker på om "building.tick" er rett vei å gå.
+   Skal tid være så viktig? Ser for meg et angrep som kan steppes
+   gjennom, antagelig heller basert på events.
