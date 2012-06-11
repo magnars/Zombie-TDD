@@ -1,7 +1,7 @@
 ZOMBIE.pageInitialized = (function (Z) {
   "use strict";
 
-  var hub = new Faye.Client("http://localhost:3000/faye");
+  var hub = Z.eventHub.create(new Faye.Client("http://localhost:3000/faye"));
 
   Z.blueprintController.create({
     blueprintRoot: document.getElementById("blueprints"),

@@ -7,6 +7,17 @@ if (typeof require === "function" && typeof module !== "undefined") {
   "use strict";
 
   buster.testCase('Event Hub', {
+    "emit": {
+      "delegates to faye publish": function () {
+        var faye = { publish: this.spy() };
+        var hub = Z.eventHub.create(faye);
+
+        hub.emit("event", { id: 42 });
+
+        assert.calledOnceWith(faye.publish, "/event", { id: 42 });
+      }
+    },
+
     "single event": {
       setUp: function () {
         this.sub = { callback: this.spy() };
