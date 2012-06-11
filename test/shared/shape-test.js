@@ -7,7 +7,7 @@ if (typeof require === "function" && typeof module !== "undefined") {
   "use strict";
 
   buster.testCase('Shape', {
-    "should return array representation": function () {
+    "returns array representation": function () {
       var s = shape.create(["***"]);
 
       assert.equals(s.toArray(), ["***"]);
@@ -20,19 +20,19 @@ if (typeof require === "function" && typeof module !== "undefined") {
       assert.equals(s.toArray(), ["***"]);
     },
 
-    "should complain about missing rows": function () {
+    "complains about missing rows": function () {
       assert.exception(function () {
         shape.create();
       }, "TypeError");
     },
 
-    "should complain about uneven shape": function () {
+    "complains about uneven shape": function () {
       assert.exception(function () {
         shape.create(["***", "*"]);
       }, "TypeError");
     },
 
-    "should complain about empty shape": function () {
+    "complains about empty shape": function () {
       assert.exception(function () {
         shape.create([]);
       }, "TypeError");
@@ -42,7 +42,7 @@ if (typeof require === "function" && typeof module !== "undefined") {
       }, "TypeError");
     },
 
-    "should extract columns": function () {
+    "extracts columns": function () {
       var s = shape.create(["ab",
                             "cd"]);
 
@@ -50,7 +50,7 @@ if (typeof require === "function" && typeof module !== "undefined") {
       assert.equals(s.getColumn(1), ["b", "d"]);
     },
 
-    "should get width of shape": function () {
+    "gets width of shape": function () {
       var s = ["***",
                "*  "];
 
@@ -68,23 +68,23 @@ if (typeof require === "function" && typeof module !== "undefined") {
   });
 
   buster.testCase('Shape rotation', {
-    "should rotate exceedingly simple shape": function () {
+    "rotates exceedingly simple shape": function () {
       assert.rotation(["*"], ["*"]);
     },
 
-    "should rotate vertical line": function () {
+    "rotates vertical line": function () {
       assert.rotation(["*", "*"], ["**"]);
     },
 
-    "should rotate horizontal line": function () {
+    "rotates horizontal line": function () {
       assert.rotation(["**"], ["*", "*"]);
     },
 
-    "should rotate rectangles": function () {
+    "rotates rectangles": function () {
       assert.rotation(["***", "***"], ["**", "**", "**"]);
     },
 
-    "should rotate tetris like shapes": function () {
+    "rotates tetris like shapes": function () {
       var before = ["***",
                     "*  "];
       var after = ["**",
@@ -93,7 +93,7 @@ if (typeof require === "function" && typeof module !== "undefined") {
       assert.rotation(before, after);
     },
 
-    "should rotate counter clockwise": function () {
+    "rotates counter clockwise": function () {
       var before = ["**",
                     " *"];
       var after = ["**",
@@ -104,7 +104,7 @@ if (typeof require === "function" && typeof module !== "undefined") {
       assert.equals(newShape.toArray(), after);
     },
 
-    "should rotate door frames": function () {
+    "rotates door frames": function () {
       assert.rotation(["**<"], ["*", "*", "^"]);
       assert.rotation(["*", "*", "^"], [">**"]);
       assert.rotation([">**"], ["v", "*", "*"]);
@@ -112,4 +112,3 @@ if (typeof require === "function" && typeof module !== "undefined") {
     }
   });
 }(ZOMBIE.shape));
-

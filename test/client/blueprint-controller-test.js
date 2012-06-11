@@ -9,7 +9,7 @@
         "class='buildRoom' data-type='Spiked mat'></button>";
     },
 
-    "should emit 'buildRoom' when button is clicked": function () {
+    "emits 'buildRoom' when button is clicked": function () {
       Z.blueprintController.create({
         blueprintRoot: this.blueprintRoot,
         hub: this.hub

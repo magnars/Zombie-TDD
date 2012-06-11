@@ -14,11 +14,11 @@
       testHelper.loadPage("/", done);
     },
 
-    "should contain title after loading page": function () {
+    "contains title after loading page": function () {
       assert.match(document.body.innerHTML, "Zombie TDD");
     },
 
-    "should add room when clicking buildRoom": function (done) {
+    "adds room when clicking buildRoom": function (done) {
       var old = numRooms();
 
       $(".buildRoom:first").trigger("click");

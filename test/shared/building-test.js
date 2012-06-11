@@ -11,7 +11,7 @@ if (typeof require === "function" && typeof module !== "undefined") {
   "use strict";
 
   buster.testCase('Building', {
-    "should use given values": function () {
+    "uses given values": function () {
       var building = Z.building.create({ zombies: 77, barricade: 2, sleepers: 3});
       assert.equals(building.zombies, 77);
       assert.equals(building.barricade, 2);

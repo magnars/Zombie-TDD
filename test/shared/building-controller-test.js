@@ -19,13 +19,13 @@ if (typeof require === "function" && typeof module !== "undefined") {
       });
     },
 
-    "should require building": function () {
+    "requires building": function () {
       assert.exception(function () {
         Z.buildingController.create({ hub: {} });
       }, "TypeError");
     },
 
-    "should require hub": function () {
+    "requires hub": function () {
       assert.exception(function () {
         Z.buildingController.create({ building: {} });
       }, "TypeError");
@@ -36,7 +36,7 @@ if (typeof require === "function" && typeof module !== "undefined") {
       assert.equals(this.controller.init(), "my little promise");
     },
 
-    "should notify listeners when building changes": function () {
+    "notifies listeners when building changes": function () {
       var listener = this.stub();
       this.controller.on("change", listener);
       this.controller.init();
@@ -48,7 +48,7 @@ if (typeof require === "function" && typeof module !== "undefined") {
       assert.calledOnceWith(listener, this.building);
     },
 
-    "should delegate events to building": function () {
+    "delegates events to building": function () {
       this.controller.init();
 
       this.hub.on.yieldTo("buildRoom", {
@@ -58,7 +58,7 @@ if (typeof require === "function" && typeof module !== "undefined") {
       assert.calledOnceWith(this.building.buildRoom, "Flamethrower Surprise");
     },
 
-    "should delegate tick to building": function () {
+    "delegates tick to building": function () {
       this.controller.init();
 
       this.hub.on.yieldTo("tick", {});

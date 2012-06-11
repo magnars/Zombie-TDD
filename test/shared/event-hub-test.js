@@ -25,7 +25,7 @@ if (typeof require === "function" && typeof module !== "undefined") {
         this.hub = Z.eventHub.create(this.faye);
       },
 
-      "delegate subscribe to faye client": function () {
+      "delegates subscribe to faye client": function () {
         var callback = this.spy();
 
         this.hub.on("create", callback);
@@ -33,7 +33,7 @@ if (typeof require === "function" && typeof module !== "undefined") {
         assert.calledOnceWith(this.faye.subscribe, "/create", callback);
       },
 
-      "resolve promise when subscription is success": function () {
+      "resolves promise when subscription is success": function () {
         var listener = this.spy();
         this.hub.on("create", this.spy()).then(listener);
 
@@ -55,7 +55,7 @@ if (typeof require === "function" && typeof module !== "undefined") {
         this.hub = Z.eventHub.create(this.faye);
       },
 
-      "delegate subscribes to faye client": function () {
+      "delegates subscribes to faye client": function () {
         var callback = this.spy();
 
         this.hub.on({
@@ -67,7 +67,7 @@ if (typeof require === "function" && typeof module !== "undefined") {
         assert.calledWith(this.faye.subscribe, "/event2", callback);
       },
 
-      "resolve promise when all subscriptions are successful": function () {
+      "resolves promise when all subscriptions are successful": function () {
         var listener = this.spy();
         this.hub.on({
           "event1": this.spy(),
