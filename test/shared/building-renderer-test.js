@@ -27,7 +27,7 @@ if (typeof require === "function" && typeof module !== "undefined") {
       refute.roomWithText(html, 'barricade', "Barricade: 0% integrity");
     },
 
-    "onlys render integer barricade values": function () {
+    "only renders integer barricade values": function () {
       var html = Z.renderBuilding({ barricade: 4.7 });
 
       assert.roomWithText(html, 'barricade', 'Barricade: 4% integrity');
