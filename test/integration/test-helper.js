@@ -55,4 +55,8 @@ var testHelper = {};
     });
   };
 
+  testHelper.getPageContents = function (url, callback) {
+    jQuery.get(pathPrefix + url, callback);
+  };
+
 }());

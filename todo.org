@@ -1,11 +1,11 @@
-* Gjøremålsliste [0/13]
-** TODO Dra i land eventHub
+* Gjøremålsliste [2/13]
+** DONE Dra i land eventHub
 *** blueprint-controller (emit)
 *** building-page
 *** integrasjonstest
 *** rydd ved å dra stuff inn i create-metoden
 *** delegate/resolve til delegates/resolves
-** TODO "should do" -> "does"
+** DONE "should do" -> "does"
 ** TODO Hører tester "zombier angriper gjennom rom i en building" i building-test.js?
 ** TODO updateBuildingView -> dra inn renderer direkte
 ** TODO rooms.js: Z.create -> _.extend(Object.create(), ...);
