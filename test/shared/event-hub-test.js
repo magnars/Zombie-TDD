@@ -6,7 +6,7 @@ if (typeof require === "function" && typeof module !== "undefined") {
 (function (Z) {
   "use strict";
 
-  buster.testCase('Event Hub', {
+  buster.testCase("Event Hub", {
     "emit": {
       "delegates to faye publish": function () {
         var faye = { publish: this.spy() };

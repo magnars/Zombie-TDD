@@ -6,7 +6,7 @@ if (typeof require === "function" && typeof module !== "undefined") {
 (function (shape) {
   "use strict";
 
-  buster.testCase('Shape', {
+  buster.testCase("Shape", {
     "returns array representation": function () {
       var s = shape.create(["***"]);
 
@@ -64,10 +64,10 @@ if (typeof require === "function" && typeof module !== "undefined") {
       return buster.assertions.deepEqual(this.actual, after);
     },
     assertMessage: "Rotation failed: Expected ${0} to rotate to ${1}, " +
-                   "but was ${actual}"
+      "but was ${actual}"
   });
 
-  buster.testCase('Shape rotation', {
+  buster.testCase("Shape rotation", {
     "rotates exceedingly simple shape": function () {
       assert.rotation(["*"], ["*"]);
     },

@@ -9,7 +9,7 @@ if (typeof require === "function" && typeof module !== "undefined") {
 (function (Z) {
   "use strict";
 
-  buster.testCase('Building Controller', {
+  buster.testCase("Building Controller", {
     setUp: function () {
       this.building = { buildRoom: this.stub(), tick: this.stub() };
       this.hub = { on: this.stub() };

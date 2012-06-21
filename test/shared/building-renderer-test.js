@@ -11,44 +11,44 @@ if (typeof require === "function" && typeof module !== "undefined") {
       var expected = "<li class='" + cssClass + "'><p>" + text + "</p></li>";
       return html.indexOf(expected) >= 0;
     },
-    assertMessage: 'Render failed: Expected ${0} to contain ${1} with text ${2}'
+    assertMessage: "Render failed: Expected ${0} to contain ${1} with text ${2}"
   });
 
-  buster.testCase('Building renderer', {
+  buster.testCase("Building renderer", {
     "renders barricade": function () {
       var html = Z.renderBuilding({ barricade: 43 });
 
-      assert.roomWithText(html, 'barricade', 'Barricade: 43% integrity');
+      assert.roomWithText(html, "barricade", "Barricade: 43% integrity");
     },
 
     "does not render barricade when torn down": function () {
       var html = Z.renderBuilding({ barricade: 0 });
 
-      refute.roomWithText(html, 'barricade', "Barricade: 0% integrity");
+      refute.roomWithText(html, "barricade", "Barricade: 0% integrity");
     },
 
     "only renders integer barricade values": function () {
       var html = Z.renderBuilding({ barricade: 4.7 });
 
-      assert.roomWithText(html, 'barricade', 'Barricade: 4% integrity');
+      assert.roomWithText(html, "barricade", "Barricade: 4% integrity");
     },
 
     "renders bedroom": function () {
       var html = Z.renderBuilding({ sleepers: 3 });
 
-      assert.roomWithText(html, 'bedroom', "Some beds (3 guards)");
+      assert.roomWithText(html, "bedroom", "Some beds (3 guards)");
     },
 
     "renders outside": function () {
       var html = Z.renderBuilding({ zombies: 30 });
 
-      assert.roomWithText(html, 'outside', "Outside (30 zombies)");
+      assert.roomWithText(html, "outside", "Outside (30 zombies)");
     },
 
     "renders room without guards": function () {
-      var html = Z.renderBuilding({ rooms: [ { name: 'Trapdoor' } ] });
+      var html = Z.renderBuilding({ rooms: [ { name: "Trapdoor" } ] });
 
-      assert.roomWithText(html, 'room', "Trapdoor");
+      assert.roomWithText(html, "room", "Trapdoor");
     },
 
     "renders room with zombies": function () {
@@ -63,21 +63,21 @@ if (typeof require === "function" && typeof module !== "undefined") {
 
     "renders room with guards": function () {
       var html = Z.renderBuilding({ rooms: [ {
-        name: 'Hiding spot',
+        name: "Hiding spot",
         guards: 1
       } ] });
 
-      assert.roomWithText(html, 'room', "Hiding spot (1 guard)");
+      assert.roomWithText(html, "room", "Hiding spot (1 guard)");
     },
 
     "renders several rooms": function () {
       var html = Z.renderBuilding({ rooms: [
-        { name: 'Trapdoor' },
-        { name: 'Hiding spot' }
+        { name: "Trapdoor" },
+        { name: "Hiding spot" }
       ] });
 
-      assert.roomWithText(html, 'room', "Trapdoor");
-      assert.roomWithText(html, 'room', "Hiding spot");
+      assert.roomWithText(html, "room", "Trapdoor");
+      assert.roomWithText(html, "room", "Hiding spot");
     }
   });
 }(ZOMBIE));

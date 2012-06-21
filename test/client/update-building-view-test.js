@@ -1,7 +1,7 @@
 (function (Z) {
   "use strict";
 
-  buster.testCase('Update Building View', {
+  buster.testCase("Update Building View", {
     "inserts renderer result into root with building": function () {
       var renderer = this.stub().returns("<h1>CiA adiuence for the win!!!</h1>");
       var building = { id: 42 };

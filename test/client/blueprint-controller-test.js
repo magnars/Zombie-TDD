@@ -1,7 +1,7 @@
 (function (Z) {
   "use strict";
 
-  buster.testCase('Blueprint Controller', {
+  buster.testCase("Blueprint Controller", {
     setUp: function () {
       this.hub = { emit: this.stub() };
       this.blueprintRoot = document.createElement("div");

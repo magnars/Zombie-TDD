@@ -9,7 +9,7 @@
     return $(".building li").length;
   }
 
-  buster.testCase('Building Page', {
+  buster.testCase("Building Page", {
     setUp: function (done) {
       testHelper.loadPage("/", done);
     },
