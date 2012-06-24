@@ -56,6 +56,10 @@ app.get("/", function (req, res) {
   });
 });
 
+app.get("/current-building.json", function (req, res) {
+  res.send(JSON.stringify(building));
+});
+
 bayeux.attach(app);
 app.listen(3000);
 

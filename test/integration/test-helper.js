@@ -1,9 +1,9 @@
 var testHelper = {};
 
-(function () {
-  "use strict";
+var ZOMBIE = { urlPrefix: "app" };
 
-  var pathPrefix = "app";
+(function (Z) {
+  "use strict";
 
   var head = document.getElementsByTagName("head")[0] || document.documentElement;
 
@@ -42,21 +42,21 @@ var testHelper = {};
 
   var loadScriptsIn = function (html, callback) {
     var matches = html.match(/script src="[^"]+/g);
-    matches = matches.map(function (s) { return pathPrefix + s.substring(12); });
+    matches = matches.map(function (s) { return Z.urlPrefix + s.substring(12); });
     loadScriptsSerially(matches, callback);
   };
 
   testHelper.loadPage = function (url, callback) {
-    jQuery.get(pathPrefix + url, function (html) {
+    jQuery.get(Z.urlPrefix + url, function (html) {
       document.body.innerHTML = html;
       loadScriptsIn(html, function () {
-        ZOMBIE.pageInitialized.then(callback);
+        Z.pageInitialized.then(callback);
       });
     });
   };
 
   testHelper.getPageContents = function (url, callback) {
-    jQuery.get(pathPrefix + url, callback);
+    jQuery.get(Z.urlPrefix + url, callback);
   };
 
-}());
+}(ZOMBIE));

@@ -8,28 +8,27 @@ ZOMBIE.pageInitialized = (function (Z) {
     hub: hub
   }).init();
 
-  var building = Z.building.create({
-    zombies: 50,
-    barricade: 7,
-    rooms: [ Z.rooms.trapdoor.create() ],
-    sleepers: 4
+  var d = when.defer();
+
+  Z.server.getCurrentBuildingProperties(function (props) {
+    var building = Z.building.create(props);
+
+    var controller = Z.buildingController.create({
+      building: building,
+      hub: hub
+    });
+
+    controller.on("change", function (building) {
+      Z.updateBuildingView(
+        document.getElementById("building"),
+        Z.renderBuilding,
+        building
+      );
+    });
+
+    controller.init().then(d.resolve);
   });
 
-  Z.hub = hub;
-
-  var controller = Z.buildingController.create({
-    building: building,
-    hub: hub
-  });
-
-  controller.on("change", function (building) {
-    Z.updateBuildingView(
-      document.getElementById("building"),
-      Z.renderBuilding,
-      building
-    );
-  });
-
-  return controller.init();
+  return d.promise;
 
 }(ZOMBIE));
