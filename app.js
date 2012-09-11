@@ -49,6 +49,12 @@ var controller = Z.buildingController.create({
   hub: hub
 }).init();
 
+app.get("/capture", function (req, res) {
+  res.render("capture", {
+    title: "Capture the building"
+  });
+});
+
 app.get("/building", function (req, res) {
   res.render("building", {
     title: "Zombie TDD",

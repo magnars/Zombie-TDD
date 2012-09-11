@@ -1,0 +1,56 @@
+.cell { width: 78px; height: 78px; margin: 0 1px 1px 0; position: relative; vertical-align: top; display: -moz-inline-stack; display: inline-block; zoom: 1; *display: inline; } /* http://foohack.com/2007/11/cross-browser-support-for-inline-block-styling/ */
+
+.north-door,
+.north-wall,
+.east-wall,
+.south-wall,
+.west-wall { position: absolute; display: block; background: #000; z-index: 99; }
+
+.north-wall { top: -3px; left: -3px; width: 84px; height: 5px; }
+.east-wall { top: -3px; right: -3px; width: 5px; height: 84px; }
+.south-wall { bottom: -3px; left: -3px; width: 84px; height: 5px; }
+.west-wall { top: -3px; left: -3px; width: 5px; height: 84px; }
+
+.north-door { top: -3px; left: -3px; width: 60px; height: 5px; background: #b1b07a; border-right: 13px solid #000; border-left: 13px solid #000; }
+
+.cell,
+.room {background: #e9c2a6;}
+.stairs {background: #e9c2a6 url(../images/room-types.png) no-repeat 0 0;}
+.enemy {background: #e9c2a6 url(../images/room-types.png) no-repeat -81px 0;}
+.trap {background: #e9c2a6 url(../images/room-types.png) no-repeat -162px 0;}
+.power {background: #e9c2a6 url(../images/room-types.png) no-repeat -243px 0;}
+.beds {background: #e9c2a6 url(../images/room-types.png) no-repeat -324px 0;}
+.lockers {background: #e9c2a6 url(../images/room-types.png) no-repeat -486px 0;}
+.concealed {background: #eee url(../images/room-types.png) no-repeat -405px 0; cursor: pointer; }
+.hidden {visibility: hidden;}
+
+/*
+  Basic layout:
+
+  .grid
+    .row
+      .cell.concealed
+      .cell.room
+      .cell.concealed
+    .row
+      .cell.hidden
+      .cell.concealed
+      .cell.hidden
+
+  With walls:
+
+  .grid
+    .row
+      .cell.concealed
+        .west-wall
+        .north-wall
+      .cell.room
+        .north-door
+      .cell.concealed
+        .north-wall
+    .row
+      .cell.hidden
+      .cell.concealed
+      .cell.hidden
+
+*/
