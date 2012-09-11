@@ -1,0 +1,17 @@
+.sidebar {float: left; min-width: 250px; width: 35%;}
+.game {overflow: hidden; padding-left: 25px;}
+
+.outside,
+.barricade,
+.bedroom,
+.room {padding: 10px; text-align: center; margin: 5px; overflow: hidden;}
+
+.room {border: 1px solid #ccc; background: #eee;}
+.outside {border: 1px dashed #ccc; color: #f00;}
+.bedroom {background: #ddf; border: 1px solid #bbe;}
+.barricade {padding-top: 0; padding-bottom: 0; background: #000; border: 1px solid #000; color: #fff;}
+
+.blueprints {margin-top: 20px; font-size: 12px;}
+.blueprint {background: #eee; border-bottom: 1px solid #ccc; margin-bottom: 5px; overflow: hidden;}
+.cost {float: right;}
+.blueprints h4 {margin-bottom: 2px; font-size: 14px;}

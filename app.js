@@ -49,8 +49,8 @@ var controller = Z.buildingController.create({
   hub: hub
 }).init();
 
-app.get("/", function (req, res) {
-  res.render("index", {
+app.get("/building", function (req, res) {
+  res.render("building", {
     title: "Zombie TDD",
     buildingHTML: Z.renderBuilding(building)
   });
