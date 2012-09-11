@@ -3,6 +3,7 @@
 
   buster.testCase('Server', {
     setUp: function () {
+      Z.urlPrefix = "";
       this.stub(jQuery, "getJSON");
     },
 
