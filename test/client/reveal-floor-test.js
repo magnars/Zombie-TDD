@@ -24,6 +24,12 @@
       });
     },
 
+    "does not freak out over null neighbours": function () {
+      refute.exception(function () {
+        Z.revealFloor([[null, { id: 1 }]], { visitedRooms: [1] });
+      });
+    },
+
     "player smells neighbouring rooms": function () {
       var visited = Z.revealFloor([
         [{ id: 1 }, { id: 2 }, { id: 3 }],
